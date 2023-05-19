@@ -7,3 +7,6 @@
 *.scad
 *.stl
 OpenSCAD/ModuleCache/AllStrings/AllStrings.txt
+
+
+/src/main/java/config/Env.java
