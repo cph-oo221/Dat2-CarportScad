@@ -14,8 +14,8 @@ public class Main
 {
 	private static ConnectionPool connectionPool;
 	private static JavaCSG csg;
-	private static final double widthmm = 6000;
-	private static final double lengthmm = 20000;
+	private static final double widthmm = 3000;
+	private static final double lengthmm = 7200;
 	private static double offsetZ = 0;
 
 	public static void main(String[] args)
@@ -90,6 +90,9 @@ public class Main
 
 	private static Geometry3D getRemModel(List<Wood> woodItems, double widthmm, double lengthmm, JavaCSG csg)
 	{
+		int remSpacingRoff = 350;
+
+
 		Wood remItem = null;
 
 		for (Wood w: woodItems)
@@ -102,9 +105,9 @@ public class Main
 		}
 
 		Geometry3D model = csg.box3D(remItem.getHeight() * 10, lengthmm, remItem.getWidth() * 10, false);
+		Geometry3D rem0 = csg.translate3D(- (widthmm / 2) + remSpacingRoff, 0, offsetZ).transform(model);
+		Geometry3D rem1 = csg.translate3D(widthmm / 2 - remSpacingRoff, 0, offsetZ).transform(model);
 
-		Geometry3D rem0 = csg.translate3D(-widthmm / 2 + 500, 0, offsetZ).transform(model);
-		Geometry3D rem1 = csg.translate3D(widthmm / 2 - 500, 0, offsetZ).transform(model);
 		offsetZ += remItem.getWidth() * 10;
 		return csg.union3D(rem0, rem1);
 	}
