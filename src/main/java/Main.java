@@ -36,6 +36,8 @@ public class Main
 
 			Geometry3D roof = getRoofModel(woodItems, widthmm, lengthmm, csg);
 
+			Geometry3D stern = getSternModel(woodItems, widthmm, lengthmm, csg);
+
 			Geometry3D rafters = getRafterModel(woodItems, widthmm, lengthmm, csg);
 
 			Geometry3D rems = getRemModel(woodItems, widthmm, lengthmm, csg);
@@ -48,7 +50,7 @@ public class Main
 			Geometry3D box1 = csg.translate3DX(woodItems.get(1).getWidth() + 30).transform(box);
 
 			Geometry3D u = csg.union3D(box, box1);*/
-			csg.view(csg.union3D(roof, rafters, rems, poles));
+			csg.view(csg.union3D(roof, stern, rafters, rems, poles));
 
 		}
 		catch (DatabaseException e)
@@ -58,6 +60,36 @@ public class Main
 
 		connectionPool.close();
 
+	}
+
+	private static Geometry3D getSternModel(List<Wood> woodItems, double widthmm, double lengthmm, JavaCSG csg) throws DatabaseException
+	{
+		List<OrderItem> orderItemList = Facade.getWoodOrderItemsByRecieptId(receipt.getIdReceipt(), connectionPool);
+		OrderItem sternItem = null;
+
+		for (OrderItem oi: orderItemList)
+		{
+			if (oi.getMaterial().getVariant().equals("Stern"))
+			{
+				sternItem = oi;
+				break;
+			}
+		}
+
+		Wood stern = (Wood) sternItem.getMaterial();
+
+		Geometry3D modelW = csg.box3D(widthmm + stern.getHeight() * 2, stern.getHeight() * 10, stern.getWidth(), false);
+		Geometry3D modelL = csg.box3D(stern.getHeight() * 10, lengthmm + stern.getHeight() * 2, stern.getWidth(), false);
+
+		Geometry3D wpos0 = csg.translate3DY(-lengthmm / 2).transform(modelW);
+		Geometry3D wpos1 = csg.translate3DY(lengthmm / 2).transform(modelW);
+
+		Geometry3D lpos0 = csg.translate3DX(-widthmm / 2).transform(modelL);
+		Geometry3D lpos1 = csg.translate3DX(widthmm / 2).transform(modelL);
+
+
+
+		return csg.union3D(wpos0, wpos1, lpos0, lpos1);
 	}
 
 	private static Geometry3D getPoleModel(List<Wood> woodItems, double widthmm, double lengthmm, JavaCSG csg) throws DatabaseException
