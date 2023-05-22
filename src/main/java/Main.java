@@ -106,10 +106,9 @@ public class Main
 		}
 
 		Geometry3D model = csg.box3D(remItem.getHeight() * 10, lengthmm - carportHang, remItem.getWidth() * 10, false);
-
 		Geometry3D rem0 = csg.translate3D(- (widthmm / 2) + remSpacingRoff, 0, offsetZ).transform(model);
 		Geometry3D rem1 = csg.translate3D(widthmm / 2 - remSpacingRoff, 0, offsetZ).transform(model);
-		
+
 //		Geometry3D model = csg.box3D(remItem.getHeight() * 10, remItem.getLength() * 10, remItem.getWidth() * 10, false);
 //		Geometry3D rem0 = csg.translate3D(-widthmm / 2 + 1100, 0, offsetZ).transform(model);
 //		Geometry3D rem1 = csg.translate3D(widthmm / 2 - 1100, 0, offsetZ).transform(model);
