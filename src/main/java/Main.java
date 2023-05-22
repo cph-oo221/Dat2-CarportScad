@@ -32,7 +32,7 @@ public class Main
 
 		try
 		{
-			List<Wood> woodItems = getWoods(Facade.getWoodOrderItemsByRecieptId(69, connectionPool));
+			List<Wood> woodItems = getWoods(Facade.getWoodOrderItemsByRecieptId(receipt.getIdReceipt(), connectionPool));
 
 			Geometry3D roof = getRoofModel(woodItems, widthmm, lengthmm, csg);
 
@@ -62,9 +62,6 @@ public class Main
 
 	private static Geometry3D getPoleModel(List<Wood> woodItems, double widthmm, double lengthmm, JavaCSG csg) throws DatabaseException
 	{
-
-		lengthmm = 6800;
-		widthmm = 6000;
 
 		List<OrderItem> orderItemList = Facade.getWoodOrderItemsByRecieptId(receipt.getIdReceipt(), connectionPool);
 		OrderItem poleItem = null;
