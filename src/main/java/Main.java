@@ -90,7 +90,6 @@ public class Main
 
 	private static Geometry3D getRemModel(List<Wood> woodItems, double widthmm, double lengthmm, JavaCSG csg)
 	{
-		int carportHang = 1000;
 		int remSpacingRoff = 350;
 
 
