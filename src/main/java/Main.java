@@ -15,7 +15,7 @@ public class Main
 	private static ConnectionPool connectionPool;
 	private static JavaCSG csg;
 	private static final double widthmm = 6000;
-	private static final double lengthmm = 2400;
+	private static final double lengthmm = 20000;
 	private static double offsetZ = 0;
 
 	public static void main(String[] args)
@@ -81,10 +81,10 @@ public class Main
 			amount = 4;
 		}
 
-		Geometry3D pos0 = csg.translate3D(-widthmm / 2 + 1100, -lengthmm / 2, offsetZ).transform(model);
-		Geometry3D pos1 = csg.translate3D(-widthmm / 2 + 1100, lengthmm / 2, offsetZ).transform(model);
-		Geometry3D pos2 = csg.translate3D(widthmm / 2 - 1100, -lengthmm / 2, offsetZ).transform(model);
-		Geometry3D pos3 = csg.translate3D(widthmm / 2 - 1100, lengthmm / 2, offsetZ).transform(model);
+		Geometry3D pos0 = csg.translate3D(-widthmm / 2 + 500, -lengthmm / 2 + poleItem.getWidth(), offsetZ).transform(model);
+		Geometry3D pos1 = csg.translate3D(-widthmm / 2 + 500, lengthmm / 2 - poleItem.getWidth(), offsetZ).transform(model);
+		Geometry3D pos2 = csg.translate3D(widthmm / 2 - 500, -lengthmm / 2  + poleItem.getWidth(), offsetZ).transform(model);
+		Geometry3D pos3 = csg.translate3D(widthmm / 2 - 500, lengthmm / 2  - poleItem.getWidth(), offsetZ).transform(model);
 		return csg.union3D(pos0, pos1, pos2, pos3);
 	}
 
@@ -101,10 +101,10 @@ public class Main
 			}
 		}
 
-		Geometry3D model = csg.box3D(remItem.getHeight() * 10, remItem.getLength() * 10, remItem.getWidth() * 10, false);
+		Geometry3D model = csg.box3D(remItem.getHeight() * 10, lengthmm, remItem.getWidth() * 10, false);
 
-		Geometry3D rem0 = csg.translate3D(-widthmm / 2 + 1100, 0, offsetZ).transform(model);
-		Geometry3D rem1 = csg.translate3D(widthmm / 2 - 1100, 0, offsetZ).transform(model);
+		Geometry3D rem0 = csg.translate3D(-widthmm / 2 + 500, 0, offsetZ).transform(model);
+		Geometry3D rem1 = csg.translate3D(widthmm / 2 - 500, 0, offsetZ).transform(model);
 		offsetZ += remItem.getWidth() * 10;
 		return csg.union3D(rem0, rem1);
 	}
@@ -126,14 +126,14 @@ public class Main
 		List<Geometry3D> rafters = new ArrayList<>();
 		double amount = Math.floor(lengthmm / 550.0);
 		double offset = 0;
-		double initialPos = -(lengthmm / 2) + rafterItem.getWidth() + 50;
+		double initialPos = -(lengthmm / 2) + rafterItem.getWidth() + 250;
 
-		Geometry3D model = csg.box3D(rafterItem.getLength() * 10, rafterItem.getHeight() * 10, rafterItem.getWidth() * 10, false);
+		Geometry3D model = csg.box3D(widthmm - 600, rafterItem.getHeight() * 10, rafterItem.getWidth() * 10, false);
 
 		for (int i = 0; i < amount; i++)
 		{
 			rafters.add(csg.translate3D(0, initialPos + offset, offsetZ).transform(model));
-			offset = lengthmm / amount + offset + 130;
+			offset = lengthmm / amount + offset;
 		}
 
 		offsetZ += rafterItem.getWidth() * 10;
@@ -165,6 +165,6 @@ public class Main
 			}
 		}
 		offsetZ += roofItem.getHeight() * 10;
-		return csg.box3D(widthmm, lengthmm, roofItem.getHeight(), false);
+		return csg.box3D(widthmm, lengthmm, roofItem.getHeight() * 10, false);
 	}
 }
