@@ -144,7 +144,6 @@ public class Main
 		return csg.union3D(rem0, rem1);
 	}
 
-	// FIXME. Just bad.
 	private static Geometry3D getRafterModel(List<Wood> woodItems, double widthmm, double lengthmm, JavaCSG csg)
 	{
 		Wood rafterItem = null;
@@ -163,7 +162,7 @@ public class Main
 		double offset = 0;
 		double initialPos = -(lengthmm / 2) + rafterItem.getWidth() + 250;
 
-		Geometry3D model = csg.box3D(widthmm - 600, rafterItem.getHeight() * 10, rafterItem.getWidth() * 10, false);
+		Geometry3D model = csg.box3D(widthmm, rafterItem.getHeight() * 10, rafterItem.getWidth() * 10, false);
 
 		for (int i = 0; i < amount; i++)
 		{
