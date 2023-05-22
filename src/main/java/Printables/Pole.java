@@ -30,7 +30,7 @@ public class Pole
         this.csg = csg;
     }
 
-    public static List<Geometry3D> print (int zOffset , int idReceipt) throws DatabaseException
+    public static List<Geometry3D> print (double zOffset , int idReceipt) throws DatabaseException
     {
         ConnectionPool connectionPool = new ConnectionPool();
 
