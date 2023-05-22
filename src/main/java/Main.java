@@ -74,6 +74,7 @@ public class Main
 				break;
 			}
 		}
+
 		Wood wood = (Wood) poleItem.getMaterial();
 
 		Geometry3D model = csg.box3D(wood.getWidth(), wood.getHeight(), wood.getLength() * 10, false);
@@ -95,14 +96,14 @@ public class Main
 		geometry3DS.add(pos1);
 		geometry3DS.add(pos2);
 		geometry3DS.add(pos3);
-		if(lengthmm > 3100 && lengthmm < 6201)
+		if(lengthmm > 3100+(flyvl*2) && lengthmm < 6201+(flyvb*2))
 		{
 			Geometry3D pos4 = csg.translate3D(-widthmm / 2 + flyvb,0 , offsetZ).transform(model);
 			Geometry3D pos5 = csg.translate3D(widthmm / 2 - flyvb,0 , offsetZ).transform(model);
 			geometry3DS.add(pos4);
 			geometry3DS.add(pos5);
 		}
-		if(lengthmm > 6200)
+		if(lengthmm > 6200 + flyvl)
 		{
 			double spaceX = -lengthmm/4;
 			double firstExtra = lengthmm/2 + spaceX;
@@ -115,14 +116,6 @@ public class Main
 			geometry3DS.add(pos7);
 			geometry3DS.add(pos8);
 			geometry3DS.add(pos9);
-		}
-		if(widthmm > 3100)
-		{
-			Geometry3D pos10 = csg.translate3D( 0 , lengthmm / 2 - flyvb, offsetZ).transform(model);
-			Geometry3D pos11 = csg.translate3D(0 , -lengthmm / 2 + flyvb, offsetZ).transform(model);
-			geometry3DS.add(pos10);
-			geometry3DS.add(pos11);
-
 		}
 		return csg.union3D(geometry3DS);
 	}
