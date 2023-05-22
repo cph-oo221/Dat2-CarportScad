@@ -25,8 +25,11 @@ public class Main
 	{
 		connectionPool = new ConnectionPool(); // Shut up!
 		receipt = Facade.getReceiptById(73, connectionPool);
-		lengthmm = receipt.getLength()*10;
-		widthmm = receipt.getWidth()*10;
+		/*lengthmm = receipt.getLength()*10;
+		widthmm = receipt.getWidth()*10;*/
+
+		lengthmm = 2400;
+		widthmm = 3300;
 		csg = JavaCSGFactory.createDefault();
 
 
@@ -78,8 +81,8 @@ public class Main
 
 		Wood stern = (Wood) sternItem.getMaterial();
 
-		Geometry3D modelW = csg.box3D(widthmm + stern.getHeight() * 2, stern.getHeight() * 10, stern.getWidth(), false);
-		Geometry3D modelL = csg.box3D(stern.getHeight() * 10, lengthmm + stern.getHeight() * 2, stern.getWidth(), false);
+		Geometry3D modelW = csg.box3D(widthmm + stern.getHeight(), stern.getHeight(), stern.getWidth(), false);
+		Geometry3D modelL = csg.box3D(stern.getHeight(), lengthmm + stern.getHeight(), stern.getWidth() , false);
 
 		Geometry3D wpos0 = csg.translate3DY(-lengthmm / 2).transform(modelW);
 		Geometry3D wpos1 = csg.translate3DY(lengthmm / 2).transform(modelW);
@@ -109,7 +112,7 @@ public class Main
 
 		Wood wood = (Wood) poleItem.getMaterial();
 
-		Geometry3D model = csg.box3D(wood.getWidth(), wood.getHeight(), wood.getLength() * 10, false);
+		Geometry3D model = csg.box3D(wood.getWidth(), wood.getHeight(), wood.getLength() * 10 - 900, false);
 
 		Geometry3D poles = csg.union3D(Pole.print(offsetZ, receipt.getIdReceipt()));
 
