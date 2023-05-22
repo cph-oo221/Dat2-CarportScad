@@ -9,8 +9,6 @@ import org.abstractica.javacsg.JavaCSG;
 import org.abstractica.javacsg.JavaCSGFactory;
 import persistence.ConnectionPool;
 import persistence.Facade;
-
-import javax.ejb.ApplicationException;
 import java.util.ArrayList;
 import java.util.List;
 
