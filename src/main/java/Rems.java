@@ -9,7 +9,7 @@ public class Rems
     private final JavaCSG csg;
     private final double carportLength;
     private final double carportWidth;
-    private final double offsetZ;
+    private final double offsetZ; // if we make 3d in one print
     private final int CARPORT_HANG = 100;
 
     public Rems(JavaCSG csg, double carportLength, double carportWidth, double offsetZ)
@@ -27,10 +27,11 @@ public class Rems
         return box;
     }
 
-    private List<Geometry3D> rem()
+    private List<Geometry3D> rems()
     {
         List<Geometry3D> remsList = new ArrayList<>();
         int rotate = 90;
+        int offsetY = (int) (carportWidth / 2 - 45);
 
 
         Geometry3D remLeft = csg.box3D(carportLength - CARPORT_HANG, 55, 20, true);
@@ -49,16 +50,22 @@ public class Rems
     }
 
 
-
-
-
     public Geometry3D testGen()
     {
-        return csg.union3D(rem().get(0), rem().get(1), box());
+        return csg.union3D(rems().get(0), rems().get(1), box());
     }
 
-    public Geometry3D generate()
+    public Geometry3D generateAsOne()
     {
-        return null;
+        return csg.union3D(rems());
+    }
+
+    public Geometry3D generateRem()
+    {
+        int rotate = 90;
+        Geometry3D rem = csg.box3D(carportLength - CARPORT_HANG, 55, 20, true);
+        rem = csg.rotate3DX(csg.degrees(rotate)).transform(rem);
+
+        return rem;
     }
 }

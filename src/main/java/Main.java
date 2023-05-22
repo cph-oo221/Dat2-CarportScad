@@ -12,7 +12,7 @@ public class Main
 //		csg.view(poles.generate());
 
 
-		Rems rem = new Rems(csg, 600, 300, 80);
+		Rems rem = new Rems(csg, 600, 300, 40);
 		csg.view(rem.testGen());
 	}
 }
