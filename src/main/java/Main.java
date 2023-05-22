@@ -87,18 +87,18 @@ public class Main
 
 		List<Geometry3D> geometry3DS = new ArrayList<>();
 
-		Geometry3D pos0 = csg.translate3D(-lengthmm / 2 - flyvl, -widthmm / 2 - flyvb, offsetZ).transform(model);
-		Geometry3D pos1 = csg.translate3D(-lengthmm / 2 - flyvl, widthmm / 2 + flyvb, offsetZ).transform(model);
-		Geometry3D pos2 = csg.translate3D(lengthmm / 2 + flyvl, -widthmm / 2 - flyvb, offsetZ).transform(model);
-		Geometry3D pos3 = csg.translate3D(lengthmm / 2 + flyvl, widthmm / 2 + flyvb, offsetZ).transform(model);
+		Geometry3D pos0 = csg.translate3D(-widthmm / 2 + flyvb,-lengthmm / 2 + flyvl, offsetZ).transform(model);
+		Geometry3D pos1 = csg.translate3D(widthmm / 2 - flyvb ,-lengthmm / 2 + flyvl,  offsetZ).transform(model);
+		Geometry3D pos2 = csg.translate3D( -widthmm / 2 + flyvb, lengthmm / 2 - flyvl, offsetZ).transform(model);
+		Geometry3D pos3 = csg.translate3D(widthmm / 2 - flyvb, lengthmm / 2 - flyvl, offsetZ).transform(model);
 		geometry3DS.add(pos0);
 		geometry3DS.add(pos1);
 		geometry3DS.add(pos2);
 		geometry3DS.add(pos3);
 		if(lengthmm > 3100 && lengthmm < 6201)
 		{
-			Geometry3D pos4 = csg.translate3D(0 , -widthmm / 2 - flyvb, offsetZ).transform(model);
-			Geometry3D pos5 = csg.translate3D(0 , widthmm / 2 + flyvb, offsetZ).transform(model);
+			Geometry3D pos4 = csg.translate3D(-widthmm / 2 + flyvb,0 , offsetZ).transform(model);
+			Geometry3D pos5 = csg.translate3D(widthmm / 2 - flyvb,0 , offsetZ).transform(model);
 			geometry3DS.add(pos4);
 			geometry3DS.add(pos5);
 		}
@@ -107,10 +107,10 @@ public class Main
 			double spaceX = -lengthmm/4;
 			double firstExtra = lengthmm/2 + spaceX;
 			double secondExtra = lengthmm/2 + spaceX*3;
-			Geometry3D pos6 = csg.translate3D(firstExtra , widthmm / 2 + flyvb, offsetZ).transform(model);
-			Geometry3D pos7 = csg.translate3D(secondExtra, widthmm / 2 + flyvb , offsetZ).transform(model);
-			Geometry3D pos8 = csg.translate3D(firstExtra, -widthmm / 2 - flyvb, offsetZ).transform(model);
-			Geometry3D pos9 = csg.translate3D(secondExtra, -widthmm / 2 - flyvb , offsetZ).transform(model);
+			Geometry3D pos6 = csg.translate3D(widthmm / 2 - flyvb , firstExtra , offsetZ).transform(model);
+			Geometry3D pos7 = csg.translate3D(widthmm / 2 - flyvb , secondExtra, offsetZ).transform(model);
+			Geometry3D pos8 = csg.translate3D(-widthmm / 2 + flyvb , firstExtra, offsetZ).transform(model);
+			Geometry3D pos9 = csg.translate3D(-widthmm / 2 + flyvb , secondExtra , offsetZ).transform(model);
 			geometry3DS.add(pos6);
 			geometry3DS.add(pos7);
 			geometry3DS.add(pos8);
@@ -118,8 +118,8 @@ public class Main
 		}
 		if(widthmm > 3100)
 		{
-			Geometry3D pos10 = csg.translate3D(lengthmm / 2 + flyvb, 0, offsetZ).transform(model);
-			Geometry3D pos11 = csg.translate3D(-lengthmm / 2 - flyvb, 0, offsetZ).transform(model);
+			Geometry3D pos10 = csg.translate3D( 0 , lengthmm / 2 - flyvb, offsetZ).transform(model);
+			Geometry3D pos11 = csg.translate3D(0 , -lengthmm / 2 + flyvb, offsetZ).transform(model);
 			geometry3DS.add(pos10);
 			geometry3DS.add(pos11);
 
