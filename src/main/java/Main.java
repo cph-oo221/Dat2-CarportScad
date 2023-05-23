@@ -77,7 +77,7 @@ public class Main
 
 		Wood wood = (Wood) poleItem.getMaterial();
 
-		Geometry3D model = csg.box3D(wood.getWidth(), wood.getHeight(), wood.getLength() * 10, false);
+		Geometry3D model = csg.box3D(wood.getWidth()*10, wood.getHeight()*10, wood.getLength() * 10, false);
 
 		Geometry3D poles = csg.union3D(Pole.print(offsetZ, receipt.getIdReceipt()));
 
