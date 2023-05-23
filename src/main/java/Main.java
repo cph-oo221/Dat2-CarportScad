@@ -1,7 +1,6 @@
 import entities.OrderItem;
 import entities.Wood;
 import exceptions.DatabaseException;
-import Printables.Pole;
 import entities.Receipt;
 import org.abstractica.javacsg.Geometry3D;
 import org.abstractica.javacsg.JavaCSG;
@@ -25,11 +24,8 @@ public class Main
 	{
 		connectionPool = new ConnectionPool(); // Shut up!
 		receipt = Facade.getReceiptById(73, connectionPool);
-		/*lengthmm = receipt.getLength()*10;
-		widthmm = receipt.getWidth()*10;*/
-
-		lengthmm = 2400;
-		widthmm = 3300;
+		lengthmm = receipt.getLength()*10;
+		widthmm = receipt.getWidth()*10;
 		csg = JavaCSGFactory.createDefault();
 
 
@@ -112,11 +108,7 @@ public class Main
 
 		Wood wood = (Wood) poleItem.getMaterial();
 
-		Geometry3D model = csg.box3D(wood.getWidth(), wood.getHeight(), wood.getLength() * 10 - 900, false);
-
-		Geometry3D poles = csg.union3D(Pole.print(offsetZ, receipt.getIdReceipt()));
-
-		csg.view(poles);
+		Geometry3D model = csg.box3D(wood.getWidth()*10, wood.getHeight()*10, wood.getLength() * 10, false);
 
 		int flyvl = 500;
 		int flyvb = 350;
