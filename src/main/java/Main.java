@@ -23,7 +23,7 @@ public class Main
 	public static void main(String[] args) throws DatabaseException
 	{
 		connectionPool = new ConnectionPool(); // Shut up!
-		receipt = Facade.getReceiptById(73, connectionPool);
+		receipt = Facade.getReceiptById(75, connectionPool);
 		lengthmm = receipt.getLength()*10;
 		widthmm = receipt.getWidth()*10;
 		csg = JavaCSGFactory.createDefault();
@@ -132,9 +132,9 @@ public class Main
 		}
 		if(lengthmm > 6200 + flyvl)
 		{
-			double spaceX = -lengthmm/4;
+			double spaceX = -lengthmm/3;
 			double firstExtra = lengthmm/2 + spaceX;
-			double secondExtra = lengthmm/2 + spaceX*3;
+			double secondExtra = lengthmm/2 + spaceX*2;
 			Geometry3D pos6 = csg.translate3D(widthmm / 2 - flyvb , firstExtra , offsetZ).transform(model);
 			Geometry3D pos7 = csg.translate3D(widthmm / 2 - flyvb , secondExtra, offsetZ).transform(model);
 			Geometry3D pos8 = csg.translate3D(-widthmm / 2 + flyvb , firstExtra, offsetZ).transform(model);
