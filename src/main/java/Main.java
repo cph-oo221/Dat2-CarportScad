@@ -26,6 +26,10 @@ public class Main
 		receipt = Facade.getReceiptById(75, connectionPool);
 		lengthmm = receipt.getLength()*10;
 		widthmm = receipt.getWidth()*10;
+
+		/*lengthmm = 2400;
+		widthmm = 3300;*/
+
 		csg = JavaCSGFactory.createDefault();
 
 
@@ -108,7 +112,7 @@ public class Main
 
 		Wood wood = (Wood) poleItem.getMaterial();
 
-		Geometry3D model = csg.box3D(wood.getWidth()*10, wood.getHeight()*10, wood.getLength() * 10, false);
+		Geometry3D model = csg.box3D(wood.getWidth() * 10, wood.getHeight() * 10, wood.getLength() * 10 - 900, false);
 
 		int flyvl = 500;
 		int flyvb = 350;
